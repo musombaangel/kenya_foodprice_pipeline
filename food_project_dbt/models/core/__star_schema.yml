@@ -1,0 +1,45 @@
+version: 2
+
+#tests for all constraints and relationships for the models
+models:
+  - name: dim_date
+    columns:
+      - name: date_key
+        tests: [unique, not_null]
+      - name: price_date
+        tests: [not_null]
+
+  - name: dim_commodity
+    columns:
+      - name: commodity_key
+        tests: [unique, not_null]
+      - name: commodity
+        tests: [not_null]
+
+  - name: dim_market
+    columns:
+      - name: market_key
+        tests: [unique, not_null]
+
+  - name: fact_prices
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+      - name: commodity_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_commodity')
+              field: commodity_key
+      - name: market_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_market')
+              field: market_key
+      - name: price
+        tests: [not_null]

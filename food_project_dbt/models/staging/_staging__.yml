@@ -1,0 +1,7 @@
+version: 2
+sources:
+ - name: 'raw_data'
+   schema: 'public'
+   tables:
+     - name: 'raw_food_prices'
+       description: 'All raw data provided for the project.'
