@@ -11,7 +11,7 @@ def extract_raw_data(csv_path: str = csv_path) -> pd.DataFrame:
     df = pd.read_csv(csv_path)
  
     if df.empty:
-        raise ValueError(f"No rows found in CSV")
+        raise ValueError(f"No data found in the CSV")
  
     logger.info(f"Extracted {len(df):,} rows, {len(df.columns)} columns")
     return df

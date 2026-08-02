@@ -33,7 +33,7 @@ def food_prices_pipeline(csv_path: str = None):
     # Transformations
     clean_df = clean_data(raw_df)
  
-    # Data Quality confirmation
+    # Data quality confirmation
     validated_df = quality_checks(clean_df)
  
     # Load

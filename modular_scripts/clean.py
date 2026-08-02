@@ -9,8 +9,7 @@ csv_path = '../sheets/wfp_food_prices_ken.csv'
  
 def standardize_units(units: str):
     """
-    Given a unit string, returns (divisor, non-numeric_unit_section).
-    Falls back to the original string if no numeric prefix is found.
+    Accepts a unit string, returns (divisor, non-numeric_unit_section).
     """
     #confirm string
     if not isinstance(units, str):
@@ -27,6 +26,11 @@ def standardize_units(units: str):
  
 @task(name="clean_data")
 def clean_data(df: pd.DataFrame) -> pd.DataFrame:
+    '''Cleans the raw data:
+    - drops exact duplicate rows
+    - handles null values (Tana River Hola)
+    - normalizes units and prices'''
+    
     logger = get_run_logger()
     logger.info("Starting data cleaning")
  
@@ -50,7 +54,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(columns=["unit_divisor"])
 
  
-    # datconverte column
+    # convert date column
     if "date" in df.columns:
         df["date"] = pd.to_datetime(df["date"], errors="coerce")
  

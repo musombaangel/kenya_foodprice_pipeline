@@ -1,6 +1,5 @@
 select *
 from {{ ref('dim_market') }}
--- check for valid coordinates
 where
     latitude is null
     or longitude is null
